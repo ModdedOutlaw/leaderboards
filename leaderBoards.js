@@ -74,8 +74,8 @@ async function getRewards() {
 
     const outputLeaderBoard = document.querySelector('.outputLeaderBoard');
 
-    for(m=0;m<=300;m++){
-    outputLeaderBoard.innerHTML += '<span>' +m+'. ' + playerArray[m].name +' = '+playerArray[m].amount + ' ' +playerArray[m].symbol +'</span> <br>';
+    for(m=0;m<=299;m++){
+    outputLeaderBoard.innerHTML += '<span>' +(m+1)+'. ' + playerArray[m].name +' = '+playerArray[m].amount + ' ' +playerArray[m].symbol +'</span> <br>';
     }
     
 
