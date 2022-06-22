@@ -31,7 +31,7 @@ async function getRewards() {
     var before = new Date();
     var now = new Date();
 
-    before.setDate(before.getDate() - 7);
+    before.setDate(before.getDate() - 9);
 
     console.log(before);
     console.log(now);
