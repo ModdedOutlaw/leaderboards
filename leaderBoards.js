@@ -102,7 +102,7 @@ async function getRewards() {
     
         let player = document.createElement('tr');
         
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a href="https://wax.atomichub.io/profile/'+playerRewards[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+playerRewards[m].name+'</a></td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/'+playerRewards[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+playerRewards[m].name+'</a></td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
 
         playerSection[0].appendChild(player);
     }
@@ -116,7 +116,7 @@ async function getRewards() {
     for (m = 0; m <= 49; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1)  + '.</td><td><a href="https://wax.atomichub.io/profile/'+landRewards[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+landRewards[m].name+'</a></td> <td>' + landRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + landRewards[m].symbol + '</span></td><td><span id="reward-type">' + landRewards[m].memo + '</span></td>';
+        player.innerHTML += '<td>' + (m + 1)  + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/'+landRewards[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+landRewards[m].name+'</a></td> <td>' + landRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + landRewards[m].symbol + '</span></td><td><span id="reward-type">' + landRewards[m].memo + '</span></td>';
 
         playerSection[0].appendChild(player);
     }
@@ -130,7 +130,7 @@ async function getRewards() {
     for (m = 0; m <= 399; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1)  + '.</td><td><a href="https://wax.atomichub.io/profile/'+playerArray[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+playerArray[m].name+'</a></td> <td>' + playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerArray[m].symbol + '</span></td><td><span id="reward-type">' + playerArray[m].memo + '</span></td>';
+        player.innerHTML += '<td>' + (m + 1)  + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/'+playerArray[m].name +'?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">'+playerArray[m].name+'</a></td> <td>' + playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerArray[m].symbol + '</span></td><td><span id="reward-type">' + playerArray[m].memo + '</span></td>';
         playerSection[0].appendChild(player);
     }
 
