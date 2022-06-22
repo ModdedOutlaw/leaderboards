@@ -100,7 +100,7 @@ async function getRewards() {
 
 
 
-    for (m = 0; m <= 50; m++) {
+    for (m = 0; m <= 49; m++) {
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + playerRewards[m].name + '</td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
@@ -114,7 +114,7 @@ async function getRewards() {
 
     playerSection[0].appendChild(break2);
 
-    for (m = 0; m <= 50; m++) {
+    for (m = 0; m <= 49; m++) {
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + landRewards[m].name + '</td> <td>' + landRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + landRewards[m].symbol + '</span></td><td><span id="reward-type">' + landRewards[m].memo + '</span></td>';
@@ -128,7 +128,7 @@ async function getRewards() {
 
     playerSection[0].appendChild(break1);
 
-    for (m = 0; m <= 299; m++) {
+    for (m = 0; m <= 399; m++) {
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + playerArray[m].name + '</td> <td>' + playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerArray[m].symbol + '</span></td><td><span id="reward-type">' + playerArray[m].memo + '</span></td>';
