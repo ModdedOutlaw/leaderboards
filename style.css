@@ -17,6 +17,10 @@ a:hover{
   text-decoration:underline;
   
 }
+tr{
+  align-content: center;
+  align-items: center;
+}
 
 #currentpage{
   color:rgb(255, 65, 198, 1);
@@ -77,6 +81,17 @@ canvas {
   margin: auto;
   align-content: center;
   padding: 0em;
+  font-weight: 600;
+  color: white;
+}
+
+.footer{
+  text-align:right;
+  margin: auto;
+  align-content: center;
+  padding: 0em;
+  font-size: 1em;
+ 
   font-weight: 600;
   color: white;
 }
@@ -155,6 +170,15 @@ canvas {
   margin: auto;
 }
 
+
+#reward-type {
+  padding: 0.2em;
+  font-size: 0.6em;
+  margin: auto;
+}
+
+
+
 #brand-tag{
   font-size: 0.6em;
   color: rgb(255, 65, 198, 1);
@@ -203,7 +227,7 @@ canvas {
   font-weight: 600;
   font-size: 1.4em;
   color: white;
-  
+  align-content: center;
 }
 
 

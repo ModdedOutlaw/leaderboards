@@ -1,5 +1,3 @@
-
-
 async function fetchRewardsJSON(url) {
     const response = await fetch(url);
 
@@ -18,7 +16,7 @@ async function getRewards() {
         symbol: "",
         date: ""
     };
-    
+
     let playerArray = [];
     let highReward = 0;
 
@@ -72,13 +70,55 @@ async function getRewards() {
 
     console.log(highReward);
 
-    const outputLeaderBoard = document.querySelector('.outputLeaderBoard');
-
-    for(m=0;m<=299;m++){
-    outputLeaderBoard.innerHTML += '<span>' +(m+1)+'. ' + playerArray[m].name +' = '+playerArray[m].amount + ' ' +playerArray[m].symbol +' '+playerArray[m].memo+' '+playerArray[m].date+'</span> <br>';
-    }
+    
+    let playerSection = document.getElementsByClassName('outputLeaderBoard');
+  
+    
     
 
+    for (m = 0; m <= 299; m++) {
+        let player = document.createElement('tr');
+
+        player.innerHTML += '<td>' +(m+1)+'.</td><td>' + playerArray[m].name +'</td> <td>'+playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' +playerArray[m].symbol +'</span></td><td><span id="reward-type">'+playerArray[m].memo+'</span></td>';
+        
+
+
+
+/*
+        let playerName = document.createElement('td');
+        playerName.id = "sub-header2";
+
+        playerName.innerHTML +=playerArray[m].name;
+
+
+        section[0].appendChild(playerName);
+
+        let playerAmount = document.createElement('td');
+        playerAmount.id = "sub-header2";
+
+        playerAmount.innerHTML += playerArray[m].amount.toFixed(1);
+
+        section[0].appendChild(playerAmount);
+
+        let amountType = document.createElement('td');
+        amountType.id = "sub-header2";
+
+        amountType.innerHTML += playerArray[m].symbol;
+        
+
+        section[0].appendChild(amountType);
+
+        let rewardType = document.createElement('td');
+        rewardType.id = "reward-type";
+
+        rewardType.innerHTML += playerArray[m].memo;
+        
+
+        section[0].appendChild(rewardType);
+        */
+        playerSection[0].appendChild(player);
+    }
+    
 }
 
 
