@@ -28,12 +28,10 @@ async function getRewards() {
     let countLand = 0;
     let countPlayer = 0;
 
-    var before = new Date();
+
     var now = new Date();
     var payoutStartDate = "2022-06-14";
-    before.setDate(before.getDate() - 9);
 
-    console.log(before);
     console.log(now);
 
     for (i = 1; i <= 5; i++) {
@@ -101,6 +99,7 @@ async function getRewards() {
 
 
     for (m = 0; m <= 49; m++) {
+    
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + playerRewards[m].name + '</td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
