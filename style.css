@@ -17,10 +17,13 @@ a:hover{
   text-decoration:underline;
   
 }
+
 tr{
   align-content: center;
   align-items: center;
 }
+
+tr:nth-child(even) {background-color:rgb(255, 65, 198, 0.5)}
 
 #currentpage{
   color:rgb(255, 65, 198, 1);
@@ -221,7 +224,9 @@ canvas {
 }
 
 .outputLeaderBoard{
-  width: 80%;
+  min-width: 40%;
+  max-width:90%;
+
   margin: auto;
   padding: 0em;
   font-weight: 600;
