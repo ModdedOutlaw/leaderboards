@@ -30,7 +30,7 @@ async function getRewards() {
 
     var before = new Date();
     var now = new Date();
-
+    var payoutStartDate = "2022-06-14";
     before.setDate(before.getDate() - 9);
 
     console.log(before);
@@ -47,7 +47,7 @@ async function getRewards() {
                 if (reward > highReward) {
                     highReward = reward;
                 }
-                if (Date.parse(element.timestamp) > Date.parse(before)) {
+                if (Date.parse(element.timestamp) > Date.parse(payoutStartDate)) {
                     player.name = element.act.data.to;
 
                     player.amount = element.act.data.amount;
