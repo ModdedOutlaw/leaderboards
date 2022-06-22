@@ -58,10 +58,12 @@ async function getRewards() {
 
                     player.date = element.timestamp;
 
-                    if(player.memo == "The Uplift World - Player Rewards"){
-                     landRewards[countLand] = player;
-                     countLand = countLand + 1;
-                    }else{
+                    if (player.memo == "The Uplift World - Player Rewards") {
+                        player.memo = "Player Rewards"
+                        landRewards[countLand] = player;
+                        countLand = countLand + 1;
+                    } else {
+                        player.memo = "Land Rewards"
                         playerRewards[countPlayer] = player;
                         countPlayer = countPlayer + 1;
                     }
@@ -92,16 +94,16 @@ async function getRewards() {
 
     console.log(highReward);
 
-    
+
     let playerSection = document.getElementsByClassName('outputLeaderBoard');
-    
-    
-    
+
+
+
 
     for (m = 0; m <= 50; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' +(m+1)+'.</td><td>' + playerRewards[m].name +'</td> <td>'+playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' +playerRewards[m].symbol +'</span></td><td><span id="reward-type">'+playerRewards[m].memo+'</span></td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + playerRewards[m].name + '</td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
 
         playerSection[0].appendChild(player);
     }
@@ -110,29 +112,29 @@ async function getRewards() {
 
     break2.innerHTML += '<td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td>';
 
-        playerSection[0].appendChild(break2);
+    playerSection[0].appendChild(break2);
 
-        for (m = 0; m <= 50; m++) {
-            let player = document.createElement('tr');
-    
-            player.innerHTML += '<td>' +(m+1)+'.</td><td>' + landRewards[m].name +'</td> <td>'+landRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' +landRewards[m].symbol +'</span></td><td><span id="reward-type">'+landRewards[m].memo+'</span></td>';
-    
-            playerSection[0].appendChild(player);
-        }
-    
-        let break1 = document.createElement('tr');
-    
-        break1.innerHTML += '<td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td>';
-    
-            playerSection[0].appendChild(break1);
+    for (m = 0; m <= 50; m++) {
+        let player = document.createElement('tr');
+
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + landRewards[m].name + '</td> <td>' + landRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + landRewards[m].symbol + '</span></td><td><span id="reward-type">' + landRewards[m].memo + '</span></td>';
+
+        playerSection[0].appendChild(player);
+    }
+
+    let break1 = document.createElement('tr');
+
+    break1.innerHTML += '<td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td>';
+
+    playerSection[0].appendChild(break1);
 
     for (m = 0; m <= 299; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' +(m+1)+'.</td><td>' + playerArray[m].name +'</td> <td>'+playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' +playerArray[m].symbol +'</span></td><td><span id="reward-type">'+playerArray[m].memo+'</span></td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + playerArray[m].name + '</td> <td>' + playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerArray[m].symbol + '</span></td><td><span id="reward-type">' + playerArray[m].memo + '</span></td>';
         playerSection[0].appendChild(player);
     }
-    
+
 }
 
 
