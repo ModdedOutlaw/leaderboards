@@ -38,7 +38,7 @@ async function getRewards() {
 
     console.log(now);
 
-    for (i = 1; i <= 5; i++) {
+    for (i = 1; i <= 7; i++) {
 
         await fetchRewardsJSON('UpliftRewardTransactions' + i + '.json').then(rewards => {
             //console.log(rewards);
