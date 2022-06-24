@@ -50,11 +50,11 @@ async function getRewards() {
 
                     let reward = element.act.data.amount;
                     if (reward > highReward) {
-                        payoutDate = element.timestamp;
+                   
                         highReward = reward;
                     }
                     if (Date.parse(element.timestamp) > Date.parse(payoutStartDate)) {
-
+                        payoutDate = element.timestamp;
                         player.name = element.act.data.to;
 
                         player.amount = element.act.data.amount;
