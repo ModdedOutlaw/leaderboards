@@ -9,6 +9,9 @@ async function fetchRewardsJSON(url) {
 
 
 async function getRewards() {
+
+    
+
     const players = {
         name: "",
         amount: 0,
@@ -30,6 +33,7 @@ async function getRewards() {
 
 
     var now = new Date();
+    var payoutDate = new Date();
     var payoutStartDate = "2022-06-23";
 
     console.log(now);
@@ -46,6 +50,7 @@ async function getRewards() {
 
                     let reward = element.act.data.amount;
                     if (reward > highReward) {
+                        payoutDate = element.timestamp;
                         highReward = reward;
                     }
                     if (Date.parse(element.timestamp) > Date.parse(payoutStartDate)) {
@@ -96,16 +101,31 @@ async function getRewards() {
     console.log(playerRewards);
 
     console.log(highReward);
+    console.log(payoutDate);
+    const payMonth = new Date(payoutDate).getMonth() + 1;
 
+    const payDay = new Date(payoutDate).getDate();
+    const payYear = new Date(payoutDate).getFullYear();
+  
+    console.log(payMonth);
+    console.log(payDay);
 
     let playerSection = document.getElementsByClassName('outputLeaderBoard');
 
+    let dateSection = document.getElementsByClassName('outputPayDate');
 
+    let payDate = document.createElement('h3'); 
+
+
+    payDate.innerHTML += payMonth+'-'+payDay+'-'+payYear;
+
+
+    dateSection[0].appendChild(payDate);
 
 
     for (m = 0; m <= 49; m++) {
 
-        let player = document.createElement('tr');
+        let player = document.createElement('tr'); 
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewards[m].name + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewards[m].name + '</a></td> <td>' + playerRewards[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerRewards[m].symbol + '</span></td><td><span id="reward-type">' + playerRewards[m].memo + '</span></td>';
 

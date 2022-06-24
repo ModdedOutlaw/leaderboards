@@ -104,6 +104,10 @@ canvas {
   color: white;
 }
 
+#header-landRewards{
+  line-height: 0%;
+}
+
 .footer{
   text-align:right;
   margin: auto;
@@ -251,6 +255,13 @@ canvas {
   align-content: center;
 }
 
+
+.outputPayDate{
+ color: rgb(6, 255, 255);
+ margin: auto;
+ text-align: center;
+ align-content: center;
+}
 
 
 
