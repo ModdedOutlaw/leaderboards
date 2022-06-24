@@ -30,7 +30,7 @@ async function getRewards() {
 
 
     var now = new Date();
-    var payoutStartDate = "2022-06-14";
+    var payoutStartDate = "2022-06-23";
 
     console.log(now);
 
