@@ -5,6 +5,14 @@
   font-family: 'Mulish', sans-serif;
 }
 
+table{
+  
+  border: 4px solid rgb(255, 65, 198, 1);
+  border-radius: 10px;
+  border-collapse:separate;
+
+}
+
 a{
   font-family: 'Merriweather Sans', sans-serif;
   text-decoration: none;
@@ -248,12 +256,16 @@ canvas {
   max-width:90%;
 
   margin: auto;
+
   padding: 0em;
   font-weight: 600;
   font-size: 1.4em;
   color: white;
   align-content: center;
+
 }
+
+
 
 
 .outputPayDate{

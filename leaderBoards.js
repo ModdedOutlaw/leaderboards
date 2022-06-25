@@ -134,7 +134,7 @@ async function getRewards() {
 
     let break2 = document.createElement('tr');
 
-    break2.innerHTML += '<td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td>';
+    break2.innerHTML += '<td colspan=5 ><hr></td>';
 
     playerSection[0].appendChild(break2);
 
@@ -148,7 +148,7 @@ async function getRewards() {
 
     let break1 = document.createElement('tr');
 
-    break1.innerHTML += '<td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td>';
+    break1.innerHTML += '<td colspan=5 ><hr></td>';
 
     playerSection[0].appendChild(break1);
 
