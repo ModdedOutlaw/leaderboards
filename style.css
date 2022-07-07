@@ -5,83 +5,79 @@
   font-family: 'Mulish', sans-serif;
 }
 
-table{
-  
-  border: 4px solid rgb(255, 65, 198, 1);
+table {
+
+  border: 2px solid rgb(255, 65, 198, 1);
   border-radius: 10px;
-  border-collapse:separate;
+  border-collapse: separate;
 
 }
 
-a{
+a {
   font-family: 'Merriweather Sans', sans-serif;
   text-decoration: none;
-  color:rgb(255, 65, 198, 1);
+  color: rgb(255, 65, 198, 1);
 }
 
-#link-wallet{
-  color: rgb(6, 255, 255);;
+#link-wallet {
+  color: rgb(6, 255, 255);
+  ;
 }
 
-#link-wallet:hover{
-  color:white;
+#link-wallet:hover {
+  color: white;
 }
 
-a:hover{
+a:hover {
 
   text-decoration: underline;
-  
+
 }
 
-tr{
+tr {
   align-content: center;
   align-items: center;
 }
 
-tr:nth-child(even) {background-color:rgb(255, 65, 198, 0.5)}
+tr:nth-child(even) {
+  background-color: rgb(255, 65, 198, 0.5)
+}
 
-#currentpage{
-  color:rgb(255, 65, 198, 1);
+#currentpage {
+  color: rgb(255, 65, 198, 1);
   background-color: rgba(255, 255, 255, 0.2);
 }
 
 
-.img {    
+.img {
   background: url(img/uplift-world-community-logo.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size:cover;
-  
+  background-size: cover;
+
   position: fixed;
   height: 100vh;
   width: 100vw;
 }
 
-#img-shadow{
+#img-shadow {
   box-shadow: 0em 0em 0.3em 0.5em rgb(255, 65, 198, 1);
 }
-#p-description{
-  background-color: rgb(6, 255, 255,0.1);
+
+#p-description {
+  background-color: rgb(6, 255, 255, 0.1);
   border-radius: 5px;
 
 }
+
 body {
- 
+
   font-size: 62.5%;
-  
-/*
-  background-image: url(img/uplift-world-community-logo.png);
-  background-repeat: no-repeat;
 
-  background-position: center;
-
-
-  background-size:80%;
- */
- background-color: rgb(33, 0, 81, 0.9);
+  background-color: rgb(33, 0, 81, 0.9);
   text-align: center;
   height: 100vh;
-  
+
 }
 
 canvas {
@@ -96,8 +92,8 @@ canvas {
   width: 94%;
   background-color: rgb(33, 0, 81, 0.8);
   transform: translateX(3%);
-  position:absolute;
-  
+  position: absolute;
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
@@ -112,17 +108,17 @@ canvas {
   color: white;
 }
 
-#header-landRewards{
+#header-landRewards {
   line-height: 0%;
 }
 
-.footer{
-  text-align:right;
+.footer {
+  text-align: right;
   margin: auto;
   align-content: center;
   padding: 0em;
   font-size: 1em;
- 
+
   font-weight: 600;
   color: white;
 }
@@ -157,12 +153,13 @@ canvas {
   font-size: 1.4em;
   color: white;
 }
-.nav-img{
-  width:50px;
+
+.nav-img {
+  width: 50px;
 }
 
 .navbar-custom {
-  background-color: rgb(33, 0, 81,0.9);
+  background-color: rgb(33, 0, 81, 0.9);
   padding: 2px;
   margin: 0px;
   position: -webkit-sticky;
@@ -171,15 +168,15 @@ canvas {
 }
 
 
-.navbar-nav{
+.navbar-nav {
   font-size: 1.5em;
 }
 
-#collapse
-{
-    position:absolute;
-    z-index:1;
+#collapse {
+  position: absolute;
+  z-index: 1;
 }
+
 #main-header {
   padding: 0em;
   font-size: 3em;
@@ -210,7 +207,7 @@ canvas {
 
 
 
-#brand-tag{
+#brand-tag {
   font-size: 0.6em;
   color: rgb(255, 65, 198, 1);
   padding: 0.3em;
@@ -242,7 +239,7 @@ canvas {
   background-color: rgb(33, 0, 81);
 }
 
-.miner-section{
+.miner-section {
   width: 80%;
   margin: auto;
   padding: 0em;
@@ -251,9 +248,9 @@ canvas {
   color: white;
 }
 
-.outputLeaderBoard{
+.outputLeaderBoard {
   min-width: 40%;
-  max-width:90%;
+  max-width: 90%;
 
   margin: auto;
 
@@ -268,13 +265,9 @@ canvas {
 
 
 
-.outputPayDate{
- color: rgb(6, 255, 255);
- margin: auto;
- text-align: center;
- align-content: center;
+.outputPayDate {
+  color: rgb(6, 255, 255);
+  margin: auto;
+  text-align: center;
+  align-content: center;
 }
-
-
-
-
