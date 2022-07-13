@@ -133,7 +133,7 @@ async function getRewards() {
 
     let break2 = document.createElement('tr');
 
-    break2.innerHTML += '<td colspan=5 ><hr></td>';
+    break2.innerHTML += '<td colspan=4 ><hr></td>';
 
     playerSection[0].appendChild(break2);
 
