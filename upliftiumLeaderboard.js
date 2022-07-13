@@ -83,6 +83,11 @@ async function getRewards() {
  
     });
 
+    playerArray.sort(function (a, b) {
+        return b.amount - a.amount;
+    });
+
+
     playerRewards.sort(function (a, b) {
         return b.amount - a.amount;
     });
@@ -148,16 +153,16 @@ async function getRewards() {
     let break1 = document.createElement('tr');
 
     break1.innerHTML += '<td colspan=5 ><hr></td>';
-/*
+
     playerSection[0].appendChild(break1);
 
-    for (m = 0; m <= 399; m++) {
+    for (m = 0; m <= playerArray.length; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerArray[m].name + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerArray[m].name + '</a></td> <td>' + playerArray[m].amount.toFixed(1) + '</td> <td><span id="reward-type"> ' + playerArray[m].symbol + '</span></td><td><span id="reward-type">' + playerArray[m].memo + '</span></td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + playerArray[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + playerArray[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + playerArray[m].type + '</span></td>';
         playerSection[0].appendChild(player);
     }
-    */
+    
 
 }
 
