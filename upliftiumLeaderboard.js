@@ -126,6 +126,29 @@ async function getRewards() {
 
     dateSection[0].appendChild(payDate);
 
+    let totalLandPayout = 0;
+    let totalPlayerPayout = 0;
+
+    for (m = 0; m < playerArray.length; m++) {
+        if (playerArray[m].type == 'playerRewards'){
+            totalPlayerPayout += Number(playerArray[m].amount);
+
+        }
+        if (playerArray[m].type == 'regionRewards'){
+            totalLandPayout += Number(playerArray[m].amount);
+
+        }
+    
+    }
+
+    //let totalRegion = document.getElementsByClassName('outputRegion');
+    //let totalPlayer = document.getElementsByClassName('outputPlayer');
+
+    let payOut = document.createElement('h3');
+
+    payOut.innerHTML += 'Total Player Payout: '+totalPlayerPayout.toLocaleString()+ '<br>Total Region Payout: '+totalLandPayout.toLocaleString()+'<br>';
+
+    dateSection[0].appendChild(payOut);
 
     for (m = 0; m <= 99; m++) {
 
@@ -155,8 +178,10 @@ async function getRewards() {
     break1.innerHTML += '<td colspan=5 ><hr></td>';
 
     playerSection[0].appendChild(break1);
+    
 
     for (m = 0; m <= playerArray.length; m++) {
+        
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + playerArray[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + playerArray[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + playerArray[m].type + '</span></td>';
