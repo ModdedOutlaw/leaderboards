@@ -145,7 +145,7 @@ async function getRewards() {
     for (m = 0; m <= 99; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td>' + landRewards[m].minecraftUUID + '</a></td> <td>' + landRewards[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + landRewards[m].type + '</span></td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q='  + landRewards[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + landRewards[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + landRewards[m].type + '</span></td>';
 
         playerSection[0].appendChild(player);
     }
