@@ -1,3 +1,48 @@
+async function fetchTemplates() {
+
+    const response = await fetch('https://wax.api.atomicassets.io/atomicassets/v1/templates?collection_name=upliftworld&schema_name=keys&page=1&limit=100&order=desc&sort=created');
+
+    const templates = await response.json();
+
+    return templates;
+
+}
+
+async function getTemplates() {
+    const template = {
+        name: "",
+        tempId: ""
+    }
+
+    let templateList = [];
+
+    await fetchTemplates().then(templates => {
+        //console.log(templates);
+        let i = 0;
+
+
+        templates.data.forEach((element, index) => {
+
+            const tempTemp = Object.create(template);
+
+            if (element.template_id != '477759') {
+
+                tempTemp.name = element.name;
+                tempTemp.templateId = element.template_id;
+                templateList[i] = tempTemp;
+                i++
+            }
+
+        });
+
+    });
+
+    return templateList;
+
+}
+
+
+
 async function fetchRewardsJSON() {
     const response = await fetch('upliftiumRewards.S7W1.json');
 
@@ -6,7 +51,6 @@ async function fetchRewardsJSON() {
     return rewards;
 
 }
-
 
 
 async function getRewards() {
@@ -20,20 +64,14 @@ async function getRewards() {
         pRewards: 0,
         lrank: 0,
         totalRewards: 0,
-        prank: 0
+        prank: 0,
+        totalKeys: 0
 
     };
 
     let playerArray = [];
     let landRewards = [];
     let playerRewards = [];
-
-    let highReward = 0;
-
-    let n = 0;
-    let count = 0;
-    let countLand = 0;
-    let countPlayer = 0;
 
 
     var now = new Date();
@@ -57,6 +95,9 @@ async function getRewards() {
     let playerRewardCount = 0;
     let regionRewardCount = 0;
 
+    let templates = await getTemplates();
+
+    //console.log(templates);
 
 
     playerArray.forEach(element => {
@@ -87,11 +128,11 @@ async function getRewards() {
 
     let playersWithLandRewards = 0;
 
-    console.log(playerArray);
+    //console.log(playerArray);
 
-    console.log(playerRewards);
+    //console.log(playerRewards);
 
-    console.log(landRewards);
+    //console.log(landRewards);
 
     playerRewards.forEach((element, index) => {
 
@@ -107,8 +148,6 @@ async function getRewards() {
             tPlayer.lRewards = search[0].amount;
 
             tPlayer.totalRewards = tPlayer.pRewards + tPlayer.lRewards;
-
-            console.log(tPlayer);
 
             finalPlayerList[playersWithLandRewards] = tPlayer;
             playersWithLandRewards++;
@@ -141,7 +180,7 @@ async function getRewards() {
 
 
 
-    console.log(finalPlayerList);
+    //console.log(finalPlayerList);
 
 
     const payMonth = new Date(payoutDate).getMonth() + 1;
@@ -179,6 +218,42 @@ async function getRewards() {
 
     }
 
+
+    let templateList = await getTemplates();
+
+
+    for (i = 0; i < templateList.length; i++) {
+
+
+        await fetchKeys('https://wax.api.atomicassets.io/atomicassets/v1/accounts?collection_name=upliftworld&schema_name=keys&template_id=' + templateList[i].templateId + '&page=1&limit=500&order=desc').then(keys => {
+
+            if (templateList[i].templateId != '330810' && templateList[i].templateId != '244813' && templateList[i].templateId != '245539') {
+                //console.log(keys.data);
+                keys.data.forEach(element => {
+                 
+                   //console.log(element);
+                    const search = finalPlayerList.filter(holder => holder.wallet == element.account);
+
+                    if(search.length != 0){
+                        //console.log(search);
+                        search[0].totalKeys += Number(element.assets);
+                    
+                    }
+                    
+                
+                });
+            }
+
+
+
+        });
+
+        //console.log(keyHolder);
+        console.log(finalPlayerList);
+
+    }
+
+
     //let totalRegion = document.getElementsByClassName('outputRegion');
     //let totalPlayer = document.getElementsByClassName('outputPlayer');
 
@@ -189,11 +264,11 @@ async function getRewards() {
     dateSection[0].appendChild(payOut);
 
     let headers = document.createElement('tr');
-    
 
-    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th colspan="2">Total Land and Player Rewards</th>'
 
-  
+    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th >Total Land and Player Rewards</th><th >Total Land Keys</th>'
+
+
     playerSection[0].appendChild(headers);
 
 
@@ -201,7 +276,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mId + '</a></td> <td colspan="2">' + finalPlayerList[m].totalRewards.toLocaleString() + '</td> ';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mId + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td><td >' + finalPlayerList[m].totalKeys.toLocaleString() + '</td> ';
 
         playerSection[0].appendChild(player);
     }
@@ -213,11 +288,11 @@ async function getRewards() {
     playerSection[0].appendChild(break3);
 
     let headers2 = document.createElement('tr');
-    
+
 
     headers2.innerHTML += '<th>Rank</th><th>Wallet</th><th colspan="2">Total Player Rewards</th>'
 
-  
+
     playerSection[0].appendChild(headers2);
 
     for (m = 0; m < playerRewards.length; m++) {
@@ -236,11 +311,11 @@ async function getRewards() {
     playerSection[0].appendChild(break2);
 
     let headers3 = document.createElement('tr');
-    
+
 
     headers3.innerHTML += '<th>Rank</th><th>Wallet</th><th colspan="2">Total Region Rewards</th>'
 
-  
+
     playerSection[0].appendChild(headers3);
 
     for (m = 0; m < landRewards.length; m++) {
@@ -258,18 +333,37 @@ async function getRewards() {
     playerSection[0].appendChild(break1);
 
 
-/*
+    /*
 
-    for (m = 0; m < playerArray.length; m++) {
+        for (m = 0; m < playerArray.length; m++) {
 
-        let player = document.createElement('tr');
+            let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + playerArray[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + playerArray[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + playerArray[m].type + '</span></td>';
-        playerSection[0].appendChild(player);
-    }
-*/
+            player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + playerArray[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + playerArray[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + playerArray[m].type + '</span></td>';
+            playerSection[0].appendChild(player);
+        }
+    */
+   
 
 }
 
+async function fetchKeys(url) {
+    const response = await fetch(url);
+
+    const keys = await response.json();
+
+    return keys;
+
+}
+
+async function fetchTemplateCount(wam) {
+
+    const response = await fetch('https://wax.api.atomicassets.io/atomicassets/v1/accounts/' + wam + '/upliftworld');
+
+    const templateCount = await response.json();
+
+    return templateCount;
+
+}
 
 getRewards();
