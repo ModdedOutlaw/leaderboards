@@ -266,7 +266,7 @@ async function getRewards() {
     let headers = document.createElement('tr');
 
 
-    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th >Total Land and Player Rewards</th><th >Total Land Keys</th>'
+    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th >Total Land and <br>Player Rewards</th><th >Land Keys</th>'
 
 
     playerSection[0].appendChild(headers);
