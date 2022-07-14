@@ -249,7 +249,7 @@ async function getRewards() {
         });
 
         //console.log(keyHolder);
-        console.log(finalPlayerList);
+        //console.log(finalPlayerList);
 
     }
 
