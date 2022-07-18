@@ -218,7 +218,7 @@ async function getRewards() {
 
     }
 
-
+/*
     let templateList = await getTemplates();
 
 
@@ -228,19 +228,17 @@ async function getRewards() {
         await fetchKeys('https://wax.api.atomicassets.io/atomicassets/v1/accounts?collection_name=upliftworld&schema_name=keys&template_id=' + templateList[i].templateId + '&page=1&limit=500&order=desc').then(keys => {
 
             if (templateList[i].templateId != '330810' && templateList[i].templateId != '244813' && templateList[i].templateId != '245539') {
-                //console.log(keys.data);
+                
                 keys.data.forEach(element => {
-                 
-                   //console.log(element);
+               
                     const search = finalPlayerList.filter(holder => holder.wallet == element.account);
 
                     if(search.length != 0){
-                        //console.log(search);
+                     
                         search[0].totalKeys += Number(element.assets);
-                    
+        
                     }
                     
-                
                 });
             }
 
@@ -248,15 +246,8 @@ async function getRewards() {
 
         });
 
-        //console.log(keyHolder);
-        //console.log(finalPlayerList);
-
     }
-
-
-    //let totalRegion = document.getElementsByClassName('outputRegion');
-    //let totalPlayer = document.getElementsByClassName('outputPlayer');
-
+*/
     let payOut = document.createElement('h3');
 
     payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
@@ -266,7 +257,7 @@ async function getRewards() {
     let headers = document.createElement('tr');
 
 
-    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th >Total Land and <br>Player Rewards</th><th >Land Keys</th>'
+    headers.innerHTML += '<th>Rank</th><th>Minecraft ID</th><th >Total Land and <br>Player Rewards</th>'
 
 
     playerSection[0].appendChild(headers);
@@ -276,7 +267,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mId + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td><td >' + finalPlayerList[m].totalKeys.toLocaleString() + '</td> ';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mId + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
@@ -331,18 +322,6 @@ async function getRewards() {
     break1.innerHTML += '<td colspan=5 ><hr></td>';
 
     playerSection[0].appendChild(break1);
-
-
-    /*
-
-        for (m = 0; m < playerArray.length; m++) {
-
-            let player = document.createElement('tr');
-
-            player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + playerArray[m].minecraftUUID + '" target="_blank">' + playerArray[m].minecraftUUID + '</a></td> <td>' + playerArray[m].amount.toLocaleString() + '</td> <td><span id="reward-type">' + playerArray[m].type + '</span></td>';
-            playerSection[0].appendChild(player);
-        }
-    */
    
 
 }
