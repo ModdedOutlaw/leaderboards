@@ -240,7 +240,7 @@ async function getRewards() {
         finalPlayerList[i].mName = data.data.player.username
     }
 
-    for (let i = 0; i < playerRewardsArray.length; i++) {
+  /*  for (let i = 0; i < playerRewardsArray.length; i++) {
         //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
        const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
         
@@ -251,7 +251,7 @@ async function getRewards() {
         playerRewardsArray[i].mName = data.data.player.username
     }
 
-
+*/
 
 
   
@@ -374,7 +374,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
