@@ -88,6 +88,11 @@ async function getRewards() {
     let landRewards = [];
     let playerRewards = [];
 
+    
+    let regionRewardsArray = [];
+    let playerRewardsArray = [];
+    let playerObjectArray = [];
+
 
     var now = new Date();
     var payoutDate = new Date();
@@ -115,18 +120,29 @@ async function getRewards() {
     //console.log(templates);
 
 
-    playerArray.forEach(element => {
+    playerArray.forEach((element , index)=> {
 
         let id = element.minecraftUUID;
 
         for (let i = 0; i <= 3; i++) {
             id = id.replace("-", "");
         }
-        element.minecraftUUID = id;
+         element.minecraftUUID = id;
+
+         const tPlayer = Object.create(player);
+
+         tPlayer.mId = id;
+
 
         if (element.type == 'playerRewards') {
 
             playerRewards[playerRewardCount] = element;
+
+            tPlayer.wallet = element.playerWallet;
+            tPlayer.pRewards = element.amount;
+
+            playerRewardsArray[playerRewardCount] = tPlayer;
+
             playerRewardCount++;
 
         }
@@ -134,8 +150,15 @@ async function getRewards() {
 
 
             landRewards[regionRewardCount] = element;
+
+            tPlayer.lRewards = element.amount;
+
+            regionRewardsArray[regionRewardCount] = tPlayer;
+
             regionRewardCount++;
         }
+
+        playerObjectArray[index] = tPlayer;
 
     });
 
@@ -145,9 +168,6 @@ async function getRewards() {
 
     //console.log(playerArray);
 
-    //console.log(playerRewards);
-
-    //console.log(landRewards);
 
     playerRewards.forEach((element, index) => {
 
@@ -172,9 +192,6 @@ async function getRewards() {
 
     });
 
-
-
-
     finalPlayerList.sort(function (a, b) {
         return b.totalRewards - a.totalRewards;
     });
@@ -193,26 +210,54 @@ async function getRewards() {
         return b.amount - a.amount;
     });
 
+    playerRewardsArray.sort(function (a, b) {
+        return b.pRewards - a.pRewards;
+    });
+
+
+    regionRewardsArray.sort(function (a, b) {
+        return b.lRewards - a.lRewards;
+    });
+
+
+
 
 
     //console.log(finalPlayerList);
 
 
-    const promises = [];
+   
     //  ^^^^^−−−−−−−−−−−−−−−−−−−−−−−−−−− use `const` or `let`, not `var`
 
     for (let i = 0; i < finalPlayerList.length; i++) {
         //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
        const resp = await fetch('https://playerdb.co/api/player/minecraft/' + finalPlayerList[i].mId);
         
-        promises[i] = await resp.json();
+        let data = await resp.json();
 
        // console.log(promises[i].data.player.username);
 
-        finalPlayerList[i].mName = promises[i].data.player.username
+        finalPlayerList[i].mName = data.data.player.username
     }
 
+    for (let i = 0; i < playerRewardsArray.length; i++) {
+        //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
+       const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
+        
+        let data = await resp.json();
+
+       // console.log(promises[i].data.player.username);
+
+        playerRewardsArray[i].mName = data.data.player.username
+    }
+
+
+
+
   
+    console.log(playerRewardsArray);
+
+    console.log(regionRewardsArray);
 
 
     //console.log(promises[0].json());
@@ -325,11 +370,11 @@ async function getRewards() {
 
     playerSection[0].appendChild(headers2);
 
-    for (m = 0; m < playerRewards.length; m++) {
+    for (m = 0; m < playerRewardsArray.length; m++) {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewards[m].playerWallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewards[m].playerWallet + '</a></td> <td colspan="2">' + playerRewards[m].amount.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
