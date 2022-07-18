@@ -207,27 +207,17 @@ async function getRewards() {
         
         promises[i] = await resp.json();
 
-        console.log(promises[i].data.player.username);
+       // console.log(promises[i].data.player.username);
 
         finalPlayerList[i].mName = promises[i].data.player.username
     }
 
-    Promise.all(promises)
-        .then((user) => {
-            for (let i = 0; i < finalPlayerList.length; i++) {
-                //               ^^^−−−−−−−−−−−−−−−− added missing declar ation
-                //console.log(user[i]);
-            }
-            //console.log(user.json());
-        })
-        .catch((e) => {
-            // handle errors here
-        });
+  
 
 
     //console.log(promises[0].json());
 
-    const p = await Promise.resolve(promises);
+    //const p = await Promise.resolve(promises);
 
 //console.log(p);
 
