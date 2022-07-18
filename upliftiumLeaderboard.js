@@ -8,6 +8,19 @@ async function fetchTemplates() {
 
 }
 
+
+
+async function fetchID(id) {
+
+    const response = await fetch('https://playerdb.co/api/player/minecraft/' + id);
+
+    const id_info = await response.json();
+
+    return id_info;
+
+}
+
+
 async function getTemplates() {
     const template = {
         name: "",
@@ -60,10 +73,12 @@ async function getRewards() {
     const player = {
         wallet: "",
         mId: "",
+        mName:"",
         lRewards: 0,
         pRewards: 0,
         lrank: 0,
         totalRewards: 0,
+
         prank: 0,
         totalKeys: 0
 
@@ -183,6 +198,40 @@ async function getRewards() {
     //console.log(finalPlayerList);
 
 
+    const promises = [];
+    //  ^^^^^−−−−−−−−−−−−−−−−−−−−−−−−−−− use `const` or `let`, not `var`
+
+    for (let i = 0; i < finalPlayerList.length; i++) {
+        //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
+       const resp = await fetch('https://playerdb.co/api/player/minecraft/' + finalPlayerList[i].mId);
+        
+        promises[i] = await resp.json();
+
+        console.log(promises[i].data.player.username);
+
+        finalPlayerList[i].mName = promises[i].data.player.username
+    }
+
+    Promise.all(promises)
+        .then((user) => {
+            for (let i = 0; i < finalPlayerList.length; i++) {
+                //               ^^^−−−−−−−−−−−−−−−− added missing declar ation
+                //console.log(user[i]);
+            }
+            //console.log(user.json());
+        })
+        .catch((e) => {
+            // handle errors here
+        });
+
+
+    //console.log(promises[0].json());
+
+    const p = await Promise.resolve(promises);
+
+//console.log(p);
+
+
     const payMonth = new Date(payoutDate).getMonth() + 1;
 
     const payDay = new Date(payoutDate).getDate();
@@ -218,36 +267,36 @@ async function getRewards() {
 
     }
 
-/*
-    let templateList = await getTemplates();
+
+    //let templateList = await getTemplates();
+    /*
+
+        for (i = 0; i < templateList.length; i++) {
 
 
-    for (i = 0; i < templateList.length; i++) {
+            await fetchKeys('https://wax.api.atomicassets.io/atomicassets/v1/accounts?collection_name=upliftworld&schema_name=keys&template_id=' + templateList[i].templateId + '&page=1&limit=500&order=desc').then(keys => {
 
-
-        await fetchKeys('https://wax.api.atomicassets.io/atomicassets/v1/accounts?collection_name=upliftworld&schema_name=keys&template_id=' + templateList[i].templateId + '&page=1&limit=500&order=desc').then(keys => {
-
-            if (templateList[i].templateId != '330810' && templateList[i].templateId != '244813' && templateList[i].templateId != '245539') {
-                
-                keys.data.forEach(element => {
-               
-                    const search = finalPlayerList.filter(holder => holder.wallet == element.account);
-
-                    if(search.length != 0){
-                     
-                        search[0].totalKeys += Number(element.assets);
-        
-                    }
+                if (templateList[i].templateId != '330810' && templateList[i].templateId != '244813' && templateList[i].templateId != '245539') {
                     
-                });
-            }
+                    keys.data.forEach(element => {
+                   
+                        const search = finalPlayerList.filter(holder => holder.wallet == element.account);
+
+                        if(search.length != 0){
+                         
+                            search[0].totalKeys += Number(element.assets);
+            
+                        }
+                        
+                    });
+                }
 
 
 
-        });
+            });
 
-    }
-*/
+        }
+    */
     let payOut = document.createElement('h3');
 
     payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
@@ -267,7 +316,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mId + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mName + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
@@ -322,7 +371,7 @@ async function getRewards() {
     break1.innerHTML += '<td colspan=5 ><hr></td>';
 
     playerSection[0].appendChild(break1);
-   
+
 
 }
 
