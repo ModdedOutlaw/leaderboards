@@ -72,7 +72,7 @@ async function fetchRewardsJSON() {
 
     payDate.innerHTML += 'Rewards from: ' + payMonth + '-' + payDay + '-' + payYear;
 
-    dateSection[0].appendChild(payDate);
+    //dateSection[0].appendChild(payDate);
 
     const rewards = await response.json();
 
@@ -147,6 +147,13 @@ async function getRewards() {
         }
         if (element.type == 'regionRewards') {
 
+            const search = playerRewardsArray.filter(holder => holder.mId == id);
+            
+            
+            if (search.length != 0){
+               // console.log(search);
+                tPlayer.totalRewards = search.pRewards + element.amount;
+            }
 
             landRewards[regionRewardCount] = element;
 
@@ -225,6 +232,15 @@ async function getRewards() {
 
         finalPlayerList[i].mName = data.data.player.username
     }
+
+    for (let i = 0; i < playerRewardsArray.length; i++) {
+
+        const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
+         
+         let data = await resp.json();
+ 
+         playerRewardsArray[i].mName = data.data.player.username
+     }
 
 
     let totalLandPayout = 0;
@@ -311,7 +327,7 @@ async function getRewards() {
     let headers2 = document.createElement('tr');
 
 
-    headers2.innerHTML += '<th>Rank</th><th>Wallet</th><th colspan="2">Total Player Rewards</th>'
+    headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Total Player Rewards</th>'
 
 
     playerSection[0].appendChild(headers2);
@@ -320,7 +336,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + ' -- '+playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
@@ -339,10 +355,10 @@ async function getRewards() {
 
     playerSection[0].appendChild(headers3);
 
-    for (m = 0; m < landRewards.length; m++) {
+    for (m = 0; m < regionRewardsArray.length; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + landRewards[m].minecraftUUID + '" target="_blank">' + landRewards[m].minecraftUUID + '</a></td> <td colspan="2">' + landRewards[m].amount.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td colspan="2">' + regionRewardsArray[m].lRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
