@@ -30,7 +30,7 @@ async function getTemplates() {
     let templateList = [];
 
     await fetchTemplates().then(templates => {
-        //console.log(templates);
+
         let i = 0;
 
 
