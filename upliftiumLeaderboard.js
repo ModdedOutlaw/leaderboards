@@ -151,8 +151,10 @@ async function getRewards() {
             
             
             if (search.length != 0){
-               // console.log(search);
-                tPlayer.totalRewards = search.pRewards + element.amount;
+                console.log(search);
+                tPlayer.totalRewards = search[0].pRewards + element.amount;
+                tPlayer.pRewards = search[0].pRewards;
+
             }
 
             landRewards[regionRewardCount] = element;
@@ -249,7 +251,7 @@ async function getRewards() {
 
     let totalLandPayout = 0;
     let totalPlayerPayout = 0;
-
+/*
     for (m = 0; m < playerArray.length; m++) {
         if (playerArray[m].type == 'playerRewards') {
             totalPlayerPayout += Number(playerArray[m].amount);
@@ -261,7 +263,7 @@ async function getRewards() {
         }
 
     }
-
+*/
 
     //let templateList = await getTemplates();
     /*
@@ -357,7 +359,7 @@ async function getRewards() {
     let headers3 = document.createElement('tr');
 
 
-    headers3.innerHTML += '<th>Rank</th><th>Wallet</th><th colspan="2">Total Region Rewards</th>'
+    headers3.innerHTML += '<th>Rank</th><th>Wallet</th><th >Region<br>Rewards</th><th >Player<Br>Rewards</th>'
 
 
     playerSection[0].appendChild(headers3);
@@ -365,7 +367,7 @@ async function getRewards() {
     for (m = 0; m < regionRewardsArray.length; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td colspan="2">' + regionRewardsArray[m].lRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
