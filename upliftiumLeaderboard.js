@@ -222,7 +222,7 @@ async function getRewards() {
     regionRewardsArray.sort(function (a, b) {
         return b.lRewards - a.lRewards;
     });
-
+/*
 
     for (let i = 0; i < finalPlayerList.length; i++) {
 
@@ -232,6 +232,7 @@ async function getRewards() {
 
         finalPlayerList[i].mName = data.data.player.username
     }
+ */
 
     for (let i = 0; i < playerRewardsArray.length; i++) {
 
@@ -299,7 +300,7 @@ async function getRewards() {
     payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
 
     dateSection[0].appendChild(payOut);
-
+/*
     let headers = document.createElement('tr');
 
 
@@ -317,12 +318,15 @@ async function getRewards() {
 
         playerSection[0].appendChild(player);
     }
+    
 
     let break3 = document.createElement('tr');
 
     break3.innerHTML += '<td colspan=4 ><hr></td>';
 
     playerSection[0].appendChild(break3);
+
+    */
 
     let headers2 = document.createElement('tr');
 
