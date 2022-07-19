@@ -171,7 +171,7 @@ async function getRewards() {
     let finalPlayerList = [];
 
     let playersWithLandRewards = 0;
-
+/*
     playerRewards.forEach((element, index) => {
 
         const search = landRewards.filter(holder => holder.minecraftUUID == element.minecraftUUID);
@@ -196,6 +196,8 @@ async function getRewards() {
 
     });
 
+    */
+/*
     finalPlayerList.sort(function (a, b) {
         return b.totalRewards - a.totalRewards;
     });
@@ -213,6 +215,7 @@ async function getRewards() {
     landRewards.sort(function (a, b) {
         return b.amount - a.amount;
     });
+    */
 
     playerRewardsArray.sort(function (a, b) {
         return b.pRewards - a.pRewards;
