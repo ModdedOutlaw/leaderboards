@@ -59,6 +59,27 @@ async function getTemplates() {
 async function fetchRewardsJSON() {
     const response = await fetch('upliftiumRewards.S7W1.json');
 
+    let payoutDate = response.headers.get('last-modified')
+    const payMonth = new Date(payoutDate).getMonth() + 1;
+
+    const payDay = new Date(payoutDate).getDate();
+    const payYear = new Date(payoutDate).getFullYear();
+
+    //console.log(payMonth);
+    //console.log(payDay);
+
+    let playerSection = document.getElementsByClassName('outputLeaderBoard');
+
+    let dateSection = document.getElementsByClassName('outputPayDate');
+
+    let payDate = document.createElement('h3');
+
+
+    payDate.innerHTML += payMonth + '-' + payDay + '-' + payYear;
+
+
+    dateSection[0].appendChild(payDate);
+
     const rewards = await response.json();
 
     return rewards;
@@ -267,25 +288,7 @@ async function getRewards() {
 //console.log(p);
 
 
-    const payMonth = new Date(payoutDate).getMonth() + 1;
-
-    const payDay = new Date(payoutDate).getDate();
-    const payYear = new Date(payoutDate).getFullYear();
-
-    //console.log(payMonth);
-    //console.log(payDay);
-
-    let playerSection = document.getElementsByClassName('outputLeaderBoard');
-
-    let dateSection = document.getElementsByClassName('outputPayDate');
-
-    let payDate = document.createElement('h3');
-
-
-    payDate.innerHTML += payMonth + '-' + payDay + '-' + payYear;
-
-
-    dateSection[0].appendChild(payDate);
+   
 
     let totalLandPayout = 0;
     let totalPlayerPayout = 0;
@@ -332,6 +335,12 @@ async function getRewards() {
 
         }
     */
+
+        let playerSection = document.getElementsByClassName('outputLeaderBoard');
+
+        let dateSection = document.getElementsByClassName('outputPayDate');
+
+
     let payOut = document.createElement('h3');
 
     payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
