@@ -360,7 +360,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + finalPlayerList[m].mId + '" target="_blank">' + finalPlayerList[m].mName + '</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + finalPlayerList[m].mId + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + finalPlayerList[m].mName + ' -- '+finalPlayerList[m].wallet +'</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
