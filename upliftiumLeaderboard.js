@@ -119,6 +119,9 @@ async function getRewards() {
     let playerRewardCount = 0;
     let regionRewardCount = 0;
 
+    let totalLandPayout = 0;
+    let totalPlayerPayout = 0;
+
     playerArray.forEach((element , index)=> {
 
         let id = element.minecraftUUID;
@@ -135,6 +138,8 @@ async function getRewards() {
 
         if (element.type == 'playerRewards') {
 
+            totalPlayerPayout += Number(element.amount);
+
             playerRewards[playerRewardCount] = element;
 
             tPlayer.wallet = element.playerWallet;
@@ -148,10 +153,12 @@ async function getRewards() {
         if (element.type == 'regionRewards') {
 
             const search = playerRewardsArray.filter(holder => holder.mId == id);
+
+            totalLandPayout += Number(element.amount);
             
             
             if (search.length != 0){
-                console.log(search);
+                //console.log(search);
                 tPlayer.totalRewards = search[0].pRewards + element.amount;
                 tPlayer.pRewards = search[0].pRewards;
 
@@ -249,8 +256,7 @@ async function getRewards() {
      }
 
 
-    let totalLandPayout = 0;
-    let totalPlayerPayout = 0;
+    
 /*
     for (m = 0; m < playerArray.length; m++) {
         if (playerArray[m].type == 'playerRewards') {
