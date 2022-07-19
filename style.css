@@ -10,6 +10,7 @@ table {
   border: 2px solid rgb(255, 65, 198, 1);
   border-radius: 10px;
   border-collapse: separate;
+  background-color: rgb(33, 0, 81, 0.9);
 
 }
 
@@ -37,6 +38,7 @@ a:hover {
 tr {
   align-content: center;
   align-items: center;
+  background-color:rgb(33, 0, 81, 0.9);
 }
 
 tr:nth-child(even) {
@@ -55,9 +57,13 @@ tr:nth-child(even) {
   background-repeat: no-repeat;
   background-size: cover;
 
+
+
   position: fixed;
   height: 100vh;
   width: 100vw;
+
+  z-index: -1;
 }
 
 #img-shadow {
@@ -106,6 +112,8 @@ canvas {
   padding: 0em;
   font-weight: 600;
   color: white;
+
+  background-color: rgb(33, 0, 81, 0.8);
 }
 
 #header-landRewards {
