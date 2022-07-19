@@ -12,6 +12,7 @@ table {
   border-collapse: separate;
   background-color: rgb(33, 0, 81, 0.9);
 
+
 }
 
 a {
@@ -34,11 +35,15 @@ a:hover {
   text-decoration: underline;
 
 }
-
+td{
+  padding:0.2em;
+}
 tr {
   align-content: center;
   align-items: center;
   background-color:rgb(33, 0, 81, 0.9);
+  font-size: 1em;
+
 }
 
 tr:nth-child(even) {
@@ -79,7 +84,6 @@ tr:nth-child(even) {
 body {
 
   font-size: 62.5%;
-
   background-color: rgb(33, 0, 81, 0.9);
   text-align: center;
   height: 100vh;
