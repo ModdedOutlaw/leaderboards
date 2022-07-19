@@ -65,18 +65,12 @@ async function fetchRewardsJSON() {
     const payDay = new Date(payoutDate).getDate();
     const payYear = new Date(payoutDate).getFullYear();
 
-    //console.log(payMonth);
-    //console.log(payDay);
-
-    let playerSection = document.getElementsByClassName('outputLeaderBoard');
-
     let dateSection = document.getElementsByClassName('outputPayDate');
 
     let payDate = document.createElement('h3');
 
 
-    payDate.innerHTML += payMonth + '-' + payDay + '-' + payYear;
-
+    payDate.innerHTML += 'Rewards from: ' + payMonth + '-' + payDay + '-' + payYear;
 
     dateSection[0].appendChild(payDate);
 
@@ -115,13 +109,6 @@ async function getRewards() {
     let playerObjectArray = [];
 
 
-    var now = new Date();
-    var payoutDate = new Date();
-    var payoutStartDate = "2022-06-23";
-
-    console.log(now);
-
-
     await fetchRewardsJSON().then(rewards => {
 
         playerArray = rewards;
@@ -129,17 +116,8 @@ async function getRewards() {
 
     });
 
-
-
-    //console.log(playerArray);
-
     let playerRewardCount = 0;
     let regionRewardCount = 0;
-
-    let templates = await getTemplates();
-
-    //console.log(templates);
-
 
     playerArray.forEach((element , index)=> {
 
@@ -187,15 +165,12 @@ async function getRewards() {
 
     let playersWithLandRewards = 0;
 
-    //console.log(playerArray);
-
-
     playerRewards.forEach((element, index) => {
 
         const search = landRewards.filter(holder => holder.minecraftUUID == element.minecraftUUID);
 
         if (search.length != 0) {
-            //console.log(search);
+          
             const tPlayer = Object.create(player);
 
             tPlayer.wallet = element.playerWallet;
@@ -206,6 +181,7 @@ async function getRewards() {
             tPlayer.totalRewards = tPlayer.pRewards + tPlayer.lRewards;
 
             finalPlayerList[playersWithLandRewards] = tPlayer;
+
             playersWithLandRewards++;
 
         }
@@ -241,54 +217,15 @@ async function getRewards() {
     });
 
 
-
-
-
-    //console.log(finalPlayerList);
-
-
-   
-    //  ^^^^^−−−−−−−−−−−−−−−−−−−−−−−−−−− use `const` or `let`, not `var`
-
     for (let i = 0; i < finalPlayerList.length; i++) {
-        //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
+
        const resp = await fetch('https://playerdb.co/api/player/minecraft/' + finalPlayerList[i].mId);
         
         let data = await resp.json();
 
-       // console.log(promises[i].data.player.username);
-
         finalPlayerList[i].mName = data.data.player.username
     }
 
-  /*  for (let i = 0; i < playerRewardsArray.length; i++) {
-        //       ^^^−−−−−−−−−−−−−−−−−−−−−−−− added missing declaration
-       const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
-        
-        let data = await resp.json();
-
-       // console.log(promises[i].data.player.username);
-
-        playerRewardsArray[i].mName = data.data.player.username
-    }
-
-*/
-
-
-  
-    console.log(playerRewardsArray);
-
-    console.log(regionRewardsArray);
-
-
-    //console.log(promises[0].json());
-
-    //const p = await Promise.resolve(promises);
-
-//console.log(p);
-
-
-   
 
     let totalLandPayout = 0;
     let totalPlayerPayout = 0;
@@ -360,7 +297,7 @@ async function getRewards() {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + finalPlayerList[m].mId + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + finalPlayerList[m].mName + ' -- '+finalPlayerList[m].wallet +'</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + finalPlayerList[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + finalPlayerList[m].mName + ' -- '+finalPlayerList[m].wallet +'</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
 
         playerSection[0].appendChild(player);
     }
