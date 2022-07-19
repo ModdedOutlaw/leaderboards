@@ -37,6 +37,7 @@ a:hover {
 }
 td{
   padding:0.2em;
+  font-size: 0.9em;
 }
 tr {
   align-content: center;
@@ -260,17 +261,22 @@ canvas {
   color: white;
 }
 
-.outputLeaderBoard {
-  min-width: 40%;
-  max-width: 90%;
+#outputPlayerLeaderBoard {
 
-  margin: auto;
 
   padding: 0em;
   font-weight: 600;
   font-size: 1.4em;
   color: white;
-  align-content: center;
+
+}
+#outputLandLeaderBoard {
+
+
+  padding: 0em;
+  font-weight: 600;
+  font-size: 1.4em;
+  color: white;
 
 }
 

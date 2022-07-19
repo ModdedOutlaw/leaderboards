@@ -301,8 +301,8 @@ async function getRewards() {
         }
     */
 
-        let playerSection = document.getElementsByClassName('outputLeaderBoard');
-
+       // let playerSection = document.getElementsByClassName('outputLeaderBoard');
+ 
         let dateSection = document.getElementsByClassName('outputPayDate');
 
 
@@ -339,13 +339,16 @@ async function getRewards() {
 
     */
 
+    let playerSection = document.getElementById('outputPlayerLeaderBoard');
+
+
     let headers2 = document.createElement('tr');
 
 
     headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Total Player Rewards</th>'
 
 
-    playerSection[0].appendChild(headers2);
+    playerSection.appendChild(headers2);
 
     for (m = 0; m < playerRewardsArray.length; m++) {
 
@@ -353,14 +356,12 @@ async function getRewards() {
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + ' -- '+playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
-        playerSection[0].appendChild(player);
+        playerSection.appendChild(player);
     }
 
-    let break2 = document.createElement('tr');
 
-    break2.innerHTML += '<td colspan=4 ><hr></td>';
+    let landSection = document.getElementById('outputLandLeaderBoard');
 
-    playerSection[0].appendChild(break2);
 
     let headers3 = document.createElement('tr');
 
@@ -368,21 +369,16 @@ async function getRewards() {
     headers3.innerHTML += '<th>Rank</th><th>Wallet</th><th >Region<br>Rewards</th><th >Player<Br>Rewards</th>'
 
 
-    playerSection[0].appendChild(headers3);
+    landSection.appendChild(headers3);
 
     for (m = 0; m < regionRewardsArray.length; m++) {
         let player = document.createElement('tr');
 
         player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
-        playerSection[0].appendChild(player);
+        landSection.appendChild(player);
     }
 
-    let break1 = document.createElement('tr');
-
-    break1.innerHTML += '<td colspan=5 ><hr></td>';
-
-    playerSection[0].appendChild(break1);
 
 
 }
