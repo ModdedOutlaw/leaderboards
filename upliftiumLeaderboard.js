@@ -345,7 +345,7 @@ async function getRewards() {
     let headers2 = document.createElement('tr');
 
 
-    headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Total Player Rewards</th>'
+    headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Player Rewards</th>'
 
 
     playerSection.appendChild(headers2);
