@@ -246,6 +246,9 @@ async function getRewards() {
     }
  */
 
+
+
+
     for (let i = 0; i < 250; i++) {
 
         const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
@@ -255,7 +258,7 @@ async function getRewards() {
          playerRewardsArray[i].mName = data.data.player.username;
      }
 
-
+/*
      for (let i = 0; i < 250; i++) {
         console.log( regionRewardsArray[i].mId);
         const resp2 = await fetch('https://playerdb.co/api/player/minecraft/' + regionRewardsArray[i].mId);
@@ -267,7 +270,7 @@ async function getRewards() {
          if(data2.success){regionRewardsArray[i].mName = data2.data.player.username;}
      }
     
-    
+    */
 /*
     for (m = 0; m < playerArray.length; m++) {
         if (playerArray[m].type == 'playerRewards') {
@@ -385,7 +388,7 @@ async function getRewards() {
     for (m = 0; m < 250; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mName + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         landSection.appendChild(player);
     }
