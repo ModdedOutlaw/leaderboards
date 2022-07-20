@@ -246,16 +246,27 @@ async function getRewards() {
     }
  */
 
-    for (let i = 0; i < playerRewardsArray.length; i++) {
+    for (let i = 0; i < 250; i++) {
 
         const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
          
          let data = await resp.json();
  
-         playerRewardsArray[i].mName = data.data.player.username
+         playerRewardsArray[i].mName = data.data.player.username;
      }
 
 
+     for (let i = 0; i < 250; i++) {
+        console.log( regionRewardsArray[i].mId);
+        const resp2 = await fetch('https://playerdb.co/api/player/minecraft/' + regionRewardsArray[i].mId);
+         
+         let data2 = await resp2.json();
+
+         console.log(data2);
+      
+         if(data2.success){regionRewardsArray[i].mName = data2.data.player.username;}
+     }
+    
     
 /*
     for (m = 0; m < playerArray.length; m++) {
@@ -345,12 +356,12 @@ async function getRewards() {
     let headers2 = document.createElement('tr');
 
 
-    headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Player Rewards</th>'
+    headers2.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th colspan="2">Player<br>Rewards</th>'
 
 
     playerSection.appendChild(headers2);
 
-    for (m = 0; m < playerRewardsArray.length; m++) {
+    for (m = 0; m < 250; m++) {
 
         let player = document.createElement('tr');
 
@@ -366,15 +377,15 @@ async function getRewards() {
     let headers3 = document.createElement('tr');
 
 
-    headers3.innerHTML += '<th>Rank</th><th>Wallet</th><th >Region<br>Rewards</th><th >Player<Br>Rewards</th>'
+    headers3.innerHTML += '<th>Rank</th><th>Minecraft Name</th><th >Region<br>Rewards</th><th >Player<Br>Rewards</th>'
 
 
     landSection.appendChild(headers3);
 
-    for (m = 0; m < regionRewardsArray.length; m++) {
+    for (m = 0; m < 250; m++) {
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mId + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://mcuuid.net/?q=' + regionRewardsArray[m].mId + '" target="_blank">' + regionRewardsArray[m].mName + '</a></td> <td >' + regionRewardsArray[m].lRewards.toLocaleString() + '</td><td >' + regionRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         landSection.appendChild(player);
     }
