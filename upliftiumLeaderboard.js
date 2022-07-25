@@ -122,6 +122,8 @@ async function getRewards() {
     let totalLandPayout = 0;
     let totalPlayerPayout = 0;
 
+
+    let resp = [];
     playerArray.forEach((element , index)=> {
 
         let id = element.minecraftUUID;
@@ -131,12 +133,16 @@ async function getRewards() {
         }
          element.minecraftUUID = id;
 
-         const tPlayer = Object.create(player);
+        const tPlayer = Object.create(player);
 
-         tPlayer.mId = id;
+        tPlayer.mId = id;
 
+        //if(index<250){}
 
+       
         if (element.type == 'playerRewards') {
+
+            resp[index] = fetch('https://playerdb.co/api/player/minecraft/'+id);
 
             totalPlayerPayout += Number(element.amount);
 
@@ -177,6 +183,23 @@ async function getRewards() {
 
     });
 
+
+
+
+/*
+    Promise.all(resp).then(responses => {
+        // all responses are resolved successfully
+        for(let response of responses) {
+          //alert(`${response.url}: ${response.status}`); // shows 200 for every url
+        }
+    
+        return responses;
+      })
+      // map array of responses into an array of response.json() to read their content
+      .then(responses => Promise.all(responses.map(r => r.json())));
+      // all JSON answers are parsed: "users" is the array of them
+  
+*/
     let finalPlayerList = [];
 
     let playersWithLandRewards = 0;
@@ -225,6 +248,38 @@ async function getRewards() {
         return b.amount - a.amount;
     });
     */
+/*
+    Promise.all(resp).then(responses => {
+        console.log(responses);
+
+        responses.forEach((player,index)=>{
+            player.json().then((data)=>
+            {
+                //console.log(data.code);
+                
+                if(data.code =='player.found'){
+
+                    //console.log(data.data.player.username);
+
+                    
+                    playerRewardsArray[index].mName = data.data.player.username;
+                }
+
+            });
+
+
+        
+           
+        });
+
+       
+
+        
+
+        console.log(playerRewardsArray);
+    });
+
+    */
 
     playerRewardsArray.sort(function (a, b) {
         return b.pRewards - a.pRewards;
@@ -246,9 +301,9 @@ async function getRewards() {
     }
  */
 
+   
 
-
-
+/*
     for (let i = 0; i < 250; i++) {
 
         const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
@@ -257,6 +312,8 @@ async function getRewards() {
  
          playerRewardsArray[i].mName = data.data.player.username;
      }
+
+*/
 
 /*
      for (let i = 0; i < 250; i++) {
@@ -366,9 +423,12 @@ async function getRewards() {
 
     for (m = 0; m < 250; m++) {
 
+        console.log("HIIII" + playerRewardsArray[m]);
+
+
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + ' -- '+playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mId + ' -- '+playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection.appendChild(player);
     }
