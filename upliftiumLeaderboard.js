@@ -440,7 +440,7 @@ async function getRewards(week) {
 
     let playerSection = document.getElementById('outputPlayerLeaderBoard');
 
-
+    playerSection.innerHTML='';
     let headers2 = document.createElement('tr');
 
 
@@ -448,7 +448,7 @@ async function getRewards(week) {
 
 
     playerSection.appendChild(headers2);
-    playerSection.innerHTML='';
+  
 
     for (m = 0; m < playerRewardsArray.length; m++) {
 
@@ -462,6 +462,7 @@ async function getRewards(week) {
 
     let landSection = document.getElementById('outputLandLeaderBoard');
 
+    landSection.innerHTML='';
 
     let headers3 = document.createElement('tr');
 
@@ -471,7 +472,6 @@ async function getRewards(week) {
 
     landSection.appendChild(headers3);
 
-    landSection.innerHTML='';
 
     for (m = 0; m < 250; m++) {
         let player = document.createElement('tr');
