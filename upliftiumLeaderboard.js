@@ -56,10 +56,37 @@ async function getTemplates() {
 
 
 
-async function fetchRewardsJSON() {
-    const response = await fetch('upliftiumRewards.S7W1.json');
+async function fetchRewardsJSON(week) {
 
-    let payoutDate = response.headers.get('last-modified')
+    const response = await fetch('upliftiumRewards.S7W1.json');
+    if (week == '1') {
+        const response = await fetch('upliftiumRewards.S7W1.json');
+    }
+    if (week == '2') {
+      
+        const response = await fetch('2022-07-29.upliftiumRewards.json');
+        const rewards = await response.json();
+        console.log(rewards);
+
+        return rewards;
+    }
+    if (week == '3') {
+        const response = await fetch('2022-07-29-2.upliftiumRewards.json');
+        const rewards = await response.json();
+        console.log(rewards);
+
+        return rewards;
+    }
+    if (week == '4') {
+        const response = await fetch('2022-07-29-3.upliftiumRewards.json');
+        const rewards = await response.json();
+        console.log(rewards);
+
+        return rewards;
+    }
+
+    let payoutDate = response.headers.get('last-modified');
+
     const payMonth = new Date(payoutDate).getMonth() + 1;
 
     const payDay = new Date(payoutDate).getDate();
@@ -68,6 +95,7 @@ async function fetchRewardsJSON() {
     let dateSection = document.getElementsByClassName('outputPayDate');
 
     let payDate = document.createElement('h3');
+    payDate.innerHTML = '';
 
 
     payDate.innerHTML += 'Rewards from: ' + payMonth + '-' + payDay + '-' + payYear;
@@ -81,14 +109,14 @@ async function fetchRewardsJSON() {
 }
 
 
-async function getRewards() {
+async function getRewards(week) {
 
 
 
     const player = {
         wallet: "",
         mId: "",
-        mName:"",
+        mName: "",
         lRewards: 0,
         pRewards: 0,
         lrank: 0,
@@ -103,13 +131,13 @@ async function getRewards() {
     let landRewards = [];
     let playerRewards = [];
 
-    
+
     let regionRewardsArray = [];
     let playerRewardsArray = [];
     let playerObjectArray = [];
 
 
-    await fetchRewardsJSON().then(rewards => {
+    await fetchRewardsJSON(week).then(rewards => {
 
         playerArray = rewards;
 
@@ -124,14 +152,14 @@ async function getRewards() {
 
 
     let resp = [];
-    playerArray.forEach((element , index)=> {
+    playerArray.forEach((element, index) => {
 
         let id = element.minecraftUUID;
 
         for (let i = 0; i <= 3; i++) {
             id = id.replace("-", "");
         }
-         element.minecraftUUID = id;
+        element.minecraftUUID = id;
 
         const tPlayer = Object.create(player);
 
@@ -139,10 +167,10 @@ async function getRewards() {
 
         //if(index<250){}
 
-       
+
         if (element.type == 'playerRewards') {
 
-            resp[index] = fetch('https://playerdb.co/api/player/minecraft/'+id);
+            resp[index] = fetch('https://playerdb.co/api/player/minecraft/' + id);
 
             totalPlayerPayout += Number(element.amount);
 
@@ -161,9 +189,9 @@ async function getRewards() {
             const search = playerRewardsArray.filter(holder => holder.mId == id);
 
             totalLandPayout += Number(element.amount);
-            
-            
-            if (search.length != 0){
+
+
+            if (search.length != 0) {
                 //console.log(search);
                 tPlayer.totalRewards = search[0].pRewards + element.amount;
                 tPlayer.pRewards = search[0].pRewards;
@@ -186,100 +214,100 @@ async function getRewards() {
 
 
 
-/*
-    Promise.all(resp).then(responses => {
-        // all responses are resolved successfully
-        for(let response of responses) {
-          //alert(`${response.url}: ${response.status}`); // shows 200 for every url
-        }
-    
-        return responses;
-      })
-      // map array of responses into an array of response.json() to read their content
-      .then(responses => Promise.all(responses.map(r => r.json())));
-      // all JSON answers are parsed: "users" is the array of them
-  
-*/
+    /*
+        Promise.all(resp).then(responses => {
+            // all responses are resolved successfully
+            for(let response of responses) {
+              //alert(`${response.url}: ${response.status}`); // shows 200 for every url
+            }
+        
+            return responses;
+          })
+          // map array of responses into an array of response.json() to read their content
+          .then(responses => Promise.all(responses.map(r => r.json())));
+          // all JSON answers are parsed: "users" is the array of them
+      
+    */
     let finalPlayerList = [];
 
     let playersWithLandRewards = 0;
-/*
-    playerRewards.forEach((element, index) => {
+    /*
+        playerRewards.forEach((element, index) => {
 
-        const search = landRewards.filter(holder => holder.minecraftUUID == element.minecraftUUID);
+            const search = landRewards.filter(holder => holder.minecraftUUID == element.minecraftUUID);
 
-        if (search.length != 0) {
-          
-            const tPlayer = Object.create(player);
+            if (search.length != 0) {
+              
+                const tPlayer = Object.create(player);
 
-            tPlayer.wallet = element.playerWallet;
-            tPlayer.mId = element.minecraftUUID;
-            tPlayer.pRewards = element.amount;
-            tPlayer.lRewards = search[0].amount;
+                tPlayer.wallet = element.playerWallet;
+                tPlayer.mId = element.minecraftUUID;
+                tPlayer.pRewards = element.amount;
+                tPlayer.lRewards = search[0].amount;
 
-            tPlayer.totalRewards = tPlayer.pRewards + tPlayer.lRewards;
+                tPlayer.totalRewards = tPlayer.pRewards + tPlayer.lRewards;
 
-            finalPlayerList[playersWithLandRewards] = tPlayer;
+                finalPlayerList[playersWithLandRewards] = tPlayer;
 
-            playersWithLandRewards++;
+                playersWithLandRewards++;
 
-        }
-
-
-    });
-
-    */
-/*
-    finalPlayerList.sort(function (a, b) {
-        return b.totalRewards - a.totalRewards;
-    });
-
-    playerArray.sort(function (a, b) {
-        return b.amount - a.amount;
-    });
+            }
 
 
-    playerRewards.sort(function (a, b) {
-        return b.amount - a.amount;
-    });
-
-
-    landRewards.sort(function (a, b) {
-        return b.amount - a.amount;
-    });
-    */
-/*
-    Promise.all(resp).then(responses => {
-        console.log(responses);
-
-        responses.forEach((player,index)=>{
-            player.json().then((data)=>
-            {
-                //console.log(data.code);
-                
-                if(data.code =='player.found'){
-
-                    //console.log(data.data.player.username);
-
-                    
-                    playerRewardsArray[index].mName = data.data.player.username;
-                }
-
-            });
-
-
-        
-           
         });
 
-       
+        */
+    /*
+        finalPlayerList.sort(function (a, b) {
+            return b.totalRewards - a.totalRewards;
+        });
 
-        
+        playerArray.sort(function (a, b) {
+            return b.amount - a.amount;
+        });
 
-        console.log(playerRewardsArray);
-    });
 
-    */
+        playerRewards.sort(function (a, b) {
+            return b.amount - a.amount;
+        });
+
+
+        landRewards.sort(function (a, b) {
+            return b.amount - a.amount;
+        });
+        */
+    /*
+        Promise.all(resp).then(responses => {
+            console.log(responses);
+
+            responses.forEach((player,index)=>{
+                player.json().then((data)=>
+                {
+                    //console.log(data.code);
+                    
+                    if(data.code =='player.found'){
+
+                        //console.log(data.data.player.username);
+
+                        
+                        playerRewardsArray[index].mName = data.data.player.username;
+                    }
+
+                });
+
+
+            
+               
+            });
+
+           
+
+            
+
+            console.log(playerRewardsArray);
+        });
+
+        */
 
     playerRewardsArray.sort(function (a, b) {
         return b.pRewards - a.pRewards;
@@ -289,58 +317,58 @@ async function getRewards() {
     regionRewardsArray.sort(function (a, b) {
         return b.lRewards - a.lRewards;
     });
-/*
+    /*
 
-    for (let i = 0; i < finalPlayerList.length; i++) {
+        for (let i = 0; i < finalPlayerList.length; i++) {
 
-       const resp = await fetch('https://playerdb.co/api/player/minecraft/' + finalPlayerList[i].mId);
-        
-        let data = await resp.json();
+           const resp = await fetch('https://playerdb.co/api/player/minecraft/' + finalPlayerList[i].mId);
+            
+            let data = await resp.json();
 
-        finalPlayerList[i].mName = data.data.player.username
-    }
- */
+            finalPlayerList[i].mName = data.data.player.username
+        }
+     */
 
-   
 
-/*
-    for (let i = 0; i < 250; i++) {
+
+
+    for (let i = 0; i < playerRewardsArray.length; i++) {
 
         const resp = await fetch('https://playerdb.co/api/player/minecraft/' + playerRewardsArray[i].mId);
-         
-         let data = await resp.json();
- 
-         playerRewardsArray[i].mName = data.data.player.username;
-     }
 
-*/
+        let data = await resp.json();
 
-/*
-     for (let i = 0; i < 250; i++) {
-        console.log( regionRewardsArray[i].mId);
-        const resp2 = await fetch('https://playerdb.co/api/player/minecraft/' + regionRewardsArray[i].mId);
-         
-         let data2 = await resp2.json();
-
-         console.log(data2);
-      
-         if(data2.success){regionRewardsArray[i].mName = data2.data.player.username;}
-     }
-    
-    */
-/*
-    for (m = 0; m < playerArray.length; m++) {
-        if (playerArray[m].type == 'playerRewards') {
-            totalPlayerPayout += Number(playerArray[m].amount);
-
-        }
-        if (playerArray[m].type == 'regionRewards') {
-            totalLandPayout += Number(playerArray[m].amount);
-
-        }
-
+        playerRewardsArray[i].mName = data.data.player.username;
     }
-*/
+
+
+
+    /*
+         for (let i = 0; i < 250; i++) {
+            console.log( regionRewardsArray[i].mId);
+            const resp2 = await fetch('https://playerdb.co/api/player/minecraft/' + regionRewardsArray[i].mId);
+             
+             let data2 = await resp2.json();
+
+             console.log(data2);
+          
+             if(data2.success){regionRewardsArray[i].mName = data2.data.player.username;}
+         }
+        
+        */
+    /*
+        for (m = 0; m < playerArray.length; m++) {
+            if (playerArray[m].type == 'playerRewards') {
+                totalPlayerPayout += Number(playerArray[m].amount);
+
+            }
+            if (playerArray[m].type == 'regionRewards') {
+                totalLandPayout += Number(playerArray[m].amount);
+
+            }
+
+        }
+    */
 
     //let templateList = await getTemplates();
     /*
@@ -372,43 +400,43 @@ async function getRewards() {
         }
     */
 
-       // let playerSection = document.getElementsByClassName('outputLeaderBoard');
- 
-        let dateSection = document.getElementsByClassName('outputPayDate');
+    // let playerSection = document.getElementsByClassName('outputLeaderBoard');
+
+   // let dateSection = document.getElementsByClassName('outputPayDate');
 
 
-    let payOut = document.createElement('h3');
+ //   let payOut = document.createElement('h3');
 
-    payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
+   // payOut.innerHTML += 'Total Player Payout: ' + totalPlayerPayout.toLocaleString() + '<br>Total Region Payout: ' + totalLandPayout.toLocaleString() + '<br>';
 
-    dateSection[0].appendChild(payOut);
-/*
-    let headers = document.createElement('tr');
-
-
-    headers.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th >Total Land and <br>Player Rewards</th>'
+   // dateSection[0].appendChild(payOut);
+    /*
+        let headers = document.createElement('tr');
 
 
-    playerSection[0].appendChild(headers);
+        headers.innerHTML += '<th>Rank</th><th>Minecraft Name -- Wax wallet</th><th >Total Land and <br>Player Rewards</th>'
 
 
-    for (m = 0; m < finalPlayerList.length; m++) {
+        playerSection[0].appendChild(headers);
 
-        let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + finalPlayerList[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + finalPlayerList[m].mName + ' -- '+finalPlayerList[m].wallet +'</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
+        for (m = 0; m < finalPlayerList.length; m++) {
 
-        playerSection[0].appendChild(player);
-    }
-    
+            let player = document.createElement('tr');
 
-    let break3 = document.createElement('tr');
+            player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + finalPlayerList[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + finalPlayerList[m].mName + ' -- '+finalPlayerList[m].wallet +'</a></td> <td >' + finalPlayerList[m].totalRewards.toLocaleString() + '</td>';
 
-    break3.innerHTML += '<td colspan=4 ><hr></td>';
+            playerSection[0].appendChild(player);
+        }
+        
 
-    playerSection[0].appendChild(break3);
+        let break3 = document.createElement('tr');
 
-    */
+        break3.innerHTML += '<td colspan=4 ><hr></td>';
+
+        playerSection[0].appendChild(break3);
+
+        */
 
     let playerSection = document.getElementById('outputPlayerLeaderBoard');
 
@@ -420,15 +448,13 @@ async function getRewards() {
 
 
     playerSection.appendChild(headers2);
+    playerSection.innerHTML='';
 
-    for (m = 0; m < 250; m++) {
-
-        console.log("HIIII" + playerRewardsArray[m]);
-
+    for (m = 0; m < playerRewardsArray.length; m++) {
 
         let player = document.createElement('tr');
 
-        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mId + ' -- '+playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
+        player.innerHTML += '<td>' + (m + 1) + '.</td><td><a id = "link-wallet" href="https://wax.atomichub.io/profile/' + playerRewardsArray[m].wallet + '?collection_name=upliftworld&order=desc&sort=transferred#inventory" target="_blank">' + playerRewardsArray[m].mName + ' -- ' + playerRewardsArray[m].wallet + '</a></td> <td colspan="2">' + playerRewardsArray[m].pRewards.toLocaleString() + '</td>';
 
         playerSection.appendChild(player);
     }
@@ -444,6 +470,8 @@ async function getRewards() {
 
 
     landSection.appendChild(headers3);
+
+    landSection.innerHTML='';
 
     for (m = 0; m < 250; m++) {
         let player = document.createElement('tr');
